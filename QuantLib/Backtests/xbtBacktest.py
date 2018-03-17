@@ -1,6 +1,7 @@
 import backtrader as bt
 import QuantLib.Strategies as strats
 import QuantLib.Backtests as backtests
+import QuantLib.Utils as utils
 
 class bitcoinBacktest(backtests.backtestAbstract):
     def run(self, startdate, enddate):
@@ -10,8 +11,8 @@ class bitcoinBacktest(backtests.backtestAbstract):
         cerebro.addstrategy(strats.bitcoinStrategy)
 
         # Add the data, trading and indicators
-        cerebro.adddata(camutils.CamDatafeedWrapper().GetBbgData("ES1 Index", startdate, enddate),
-                        name='SPX')
+        cerebro.adddata(utils.backtestDatafeed().GetBbgData("ES1 Index", start_date=startdate, end_date=enddate),
+                        name="SPX")
 
         # Set our desired cash start
         cerebro.broker.setcash(self.portcash)
